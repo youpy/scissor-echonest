@@ -24,6 +24,8 @@ Scissor extension to use Echo Nest Developers API
  require 'scissor/echonest'
 
  Scissor.echonest_api_key = 'YOUR_API_KEY'
+
+ # split into beats
  beats = Scissor('trans_europe_express.mp3').beats
 
  # sort beats by duration and write into file
