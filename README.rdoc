@@ -21,17 +21,17 @@ Scissor extension to use Echo Nest Developers API
 
 == Synopsis
 
+ require 'rubygems'
  require 'scissor/echonest'
 
  Scissor.echonest_api_key = 'YOUR_API_KEY'
 
- # split into beats
- beats = Scissor('trans_europe_express.mp3').beats
+ # sort beats by duration
+ beats = Scissor('trans_europe_express.mp3').beats.
+  sort_by {|beat| beat.duration }
 
- # sort beats by duration and write into file
- beats.
-  sort_by {|beat| beat.duration }.
-  inject(Scissor()) {|m, beat| m + beat } > 'sorted.mp3'
+ # join beats and write into file
+ Scissor.join(beats) > 'sorted.mp3'
 
 == Copyright
 
