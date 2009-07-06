@@ -16,18 +16,37 @@ module Scissor
     end
 
     def beats
-      chunks = []
-      tmpfile = Pathname.new('/tmp/scissor_echonest_temp_' + $$.to_s + '.mp3')
+      tempfile_for_echonest do |tmpfile|
+        chunks = []
+        scissor = to_file(tmpfile)
 
-      scissor = to_file(tmpfile)
+        beats = echonest.get_beats(tmpfile)
+        beats.inject do |m, beat|
+          chunks << self[m.start, beat.start - m.start]
+          beat
+        end
 
-      beats = echonest.get_beats(tmpfile)
-      beats.inject do |m, beat|
-        chunks << self[m.start, beat.start - m.start]
-        beat
+        chunks
       end
+    end
 
-      chunks
+    def segments
+      tempfile_for_echonest do |tmpfile|
+        scissor = to_file(tmpfile)
+
+        segments = echonest.get_segments(tmpfile)
+        segments.inject([]) do |chunks, segment|
+          chunks << self[segment.start, segment.duration]
+          chunks
+        end
+      end
+    end
+
+    private
+
+    def tempfile_for_echonest
+      tmpfile = Pathname.new('/tmp/scissor_echonest_temp_' + $$.to_s + '.mp3')
+      yield tmpfile
     ensure
       tmpfile.unlink
     end
