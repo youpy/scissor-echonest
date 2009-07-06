@@ -61,8 +61,8 @@ spec = Gem::Specification.new do |s|
   s.require_path      = "lib"
   s.test_files        = Dir["test/test_*.rb"]
 
-  s.add_dependency('scissor', '>=0.0.19')
-  s.add_dependency('ruby-echonest', '>=0.0.3')
+  s.add_dependency('youpy-scissor', '>=0.0.19')
+  s.add_dependency('youpy-ruby-echonest', '>=0.0.3')
   #s.required_ruby_version = '>= 1.8.2'
 
   s.files = %w(README.rdoc ChangeLog Rakefile) +
