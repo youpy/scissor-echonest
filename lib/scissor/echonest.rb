@@ -40,7 +40,7 @@ module Scissor
         segments = echonest.get_segments(tmpfile)
         segments.inject([]) do |chunks, segment|
           chunk = self[segment.start, segment.duration]
-          Echonest::Meta::Segment.init(chunk, segment )
+          Echonest::Meta::Segment.init(chunk, segment)
           chunks << chunk
           chunks
         end
