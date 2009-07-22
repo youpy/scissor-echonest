@@ -1,5 +1,6 @@
 require 'scissor'
 require 'echonest'
+require 'scissor/echonest/meta'
 
 module Scissor
   def self.echonest_api_key=(echonest_api_key)
@@ -22,7 +23,9 @@ module Scissor
 
         beats = echonest.get_beats(tmpfile)
         beats.inject do |m, beat|
-          chunks << self[m.start, beat.start - m.start]
+          chunk = self[m.start, beat.start - m.start]
+          Echonest::Meta::Beat.init(chunk, m)
+          chunks << chunk
           beat
         end
 
@@ -36,7 +39,9 @@ module Scissor
 
         segments = echonest.get_segments(tmpfile)
         segments.inject([]) do |chunks, segment|
-          chunks << self[segment.start, segment.duration]
+          chunk = self[segment.start, segment.duration]
+          Echonest::Meta::Segment.init(chunk, segment )
+          chunks << chunk
           chunks
         end
       end
