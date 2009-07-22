@@ -24,7 +24,7 @@ describe Scissor do
     beats.size.should eql(384)
     beats[0].should be_an_instance_of(Scissor::Chunk)
     beats[0].duration.should eql(0.47604)
-    beats[0].fragments.first.filename.to_s.should eql(fixture('sample.mp3'))
+    beats[0].fragments.first.filename.should eql(fixture('sample.mp3'))
   end
 
   it 'should get segments' do
@@ -40,6 +40,6 @@ describe Scissor do
     segments.size.should eql(830)
     segments[0].should be_an_instance_of(Scissor::Chunk)
     segments[0].duration.should eql(0.30327)
-    segments[0].fragments.first.filename.to_s.should eql(fixture('sample.mp3'))
+    segments[0].fragments.first.filename.should eql(fixture('sample.mp3'))
   end
 end
