@@ -1,6 +1,6 @@
 = scissor-echonest
 
-Scissor extension to use Echo Nest Developers API
+{Scissor}[http://github.com/youpy/scissor/tree/master] extension to use Echo Nest Developers API
 
 == Description
 
