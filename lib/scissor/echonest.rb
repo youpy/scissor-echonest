@@ -22,6 +22,14 @@ module Scissor
         scissor = to_file(tmpfile)
 
         beats = echonest.get_beats(tmpfile)
+
+        if beats.size != 0
+          chunk = self[0, beats.first.start]
+          beat = Beat.new(beats.first.start, 1.0)
+          chunk.set_delegate(beat)
+          chunks << chunk
+        end
+
         beats.inject do |m, beat|
           chunk = self[m.start, beat.start - m.start]
           chunk.set_delegate(m)

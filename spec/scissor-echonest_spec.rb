@@ -21,11 +21,15 @@ describe Scissor do
     scissor.stub!(:echonest).and_return(api)
 
     beats = scissor.beats
-    beats.size.should eql(384)
+    beats.size.should eql(385)
     beats[0].should be_an_instance_of(Scissor::Chunk)
-    beats[0].duration.should eql(0.47604)
+    beats[0].duration.should eql(0.35812)
     beats[0].fragments.first.filename.should eql(fixture('sample.mp3'))
-    beats[0].confidence.should eql(0.296)
+    beats[0].confidence.should eql(1.0)
+    beats[1].should be_an_instance_of(Scissor::Chunk)
+    beats[1].duration.should eql(0.47604)
+    beats[1].fragments.first.filename.should eql(fixture('sample.mp3'))
+    beats[1].confidence.should eql(0.296)
   end
 
   it 'should get segments' do
