@@ -21,7 +21,7 @@ DESCRIPTION       = "Scissor extension to use Echo Nest Developers API"
 RUBYFORGE_PROJECT = "scissorechonest"
 HOMEPATH          = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 BIN_FILES         = %w(  )
-VERS              = "0.0.3"
+VERS              = "0.0.4"
 
 REV = File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
 CLEAN.include ['**/.*.sw?', '*.gem', '.config']
