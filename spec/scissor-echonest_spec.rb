@@ -15,7 +15,7 @@ describe Scissor do
     Scissor.echonest_api_key = 'XXX'
 
     api = Echonest::Api.new('XXX')
-    api.connection.stub!(:request).and_return(open(fixture('get_beats.xml')).read)
+    api.user_agent.stub!(:get_content).and_return(open(fixture('get_beats.xml')).read)
 
     scissor = Scissor(fixture('sample.mp3'))
     scissor.stub!(:echonest).and_return(api)
@@ -36,7 +36,7 @@ describe Scissor do
     Scissor.echonest_api_key = 'XXX'
 
     api = Echonest::Api.new('XXX')
-    api.connection.stub!(:request).and_return(open(fixture('get_segments.xml')).read)
+    api.user_agent.stub!(:get_content).and_return(open(fixture('get_segments.xml')).read)
 
     scissor = Scissor(fixture('sample.mp3'))
     scissor.stub!(:echonest).and_return(api)
