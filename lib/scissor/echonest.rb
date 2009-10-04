@@ -19,7 +19,7 @@ module Scissor
     def beats
       tempfile_for_echonest do |tmpfile|
         chunks = []
-        scissor = to_file(tmpfile)
+        scissor = to_file(tmpfile, :bitrate => '64k')
 
         beats = echonest.get_beats(tmpfile)
 
@@ -43,7 +43,7 @@ module Scissor
 
     def segments
       tempfile_for_echonest do |tmpfile|
-        scissor = to_file(tmpfile)
+        scissor = to_file(tmpfile, :bitrate => '64k')
 
         segments = echonest.get_segments(tmpfile)
         segments.inject([]) do |chunks, segment|
