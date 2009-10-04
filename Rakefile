@@ -21,7 +21,7 @@ DESCRIPTION       = "Scissor extension to use Echo Nest Developers API"
 RUBYFORGE_PROJECT = "scissorechonest"
 HOMEPATH          = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 BIN_FILES         = %w(  )
-VERS              = "0.0.4"
+VERS              = "0.0.5"
 
 REV = File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
 CLEAN.include ['**/.*.sw?', '*.gem', '.config']
@@ -61,8 +61,8 @@ spec = Gem::Specification.new do |s|
   s.require_path      = "lib"
   s.test_files        = Dir["test/test_*.rb"]
 
-  s.add_dependency('youpy-scissor', '>=0.0.19')
-  s.add_dependency('youpy-ruby-echonest', '>=0.0.3')
+  s.add_dependency('youpy-scissor', '>=0.0.22')
+  s.add_dependency('youpy-ruby-echonest', '>=0.0.6')
   #s.required_ruby_version = '>= 1.8.2'
 
   s.files = %w(README.rdoc ChangeLog Rakefile) +

@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{scissor-echonest}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["youpy"]
-  s.date = %q{2009-08-31}
+  s.date = %q{2009-10-05}
   s.description = %q{Scissor extension to use Echo Nest Developers API}
   s.email = %q{youpy@buycheapviagraonlinenow.com}
   s.extra_rdoc_files = ["README.rdoc", "ChangeLog"]
@@ -25,13 +25,16 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<youpy-scissor>, [">= 0.0.19"])
-      s.add_runtime_dependency(%q<youpy-ruby-echonest>, [">= 0.0.3"])
+      s.add_runtime_dependency(%q<youpy-ruby-echonest>, [">= 0.0.6"])
+      s.add_runtime_dependency(%q<youpy-scissor>, [">= 0.0.22"])
     else
       s.add_dependency(%q<youpy-scissor>, [">= 0.0.19"])
-      s.add_dependency(%q<youpy-ruby-echonest>, [">= 0.0.3"])
+      s.add_dependency(%q<youpy-ruby-echonest>, [">= 0.0.6"])
+      s.add_dependency(%q<youpy-scissor>, [">= 0.0.22"])
     end
   else
     s.add_dependency(%q<youpy-scissor>, [">= 0.0.19"])
-    s.add_dependency(%q<youpy-ruby-echonest>, [">= 0.0.3"])
+    s.add_dependency(%q<youpy-ruby-echonest>, [">= 0.0.6"])
+    s.add_dependency(%q<youpy-scissor>, [">= 0.0.22"])
   end
 end
