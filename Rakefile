@@ -19,7 +19,7 @@ AUTHOR            = "youpy"
 EMAIL             = "youpy@buycheapviagraonlinenow.com"
 DESCRIPTION       = "Scissor extension to use Echo Nest Developers API"
 RUBYFORGE_PROJECT = "scissorechonest"
-HOMEPATH          = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
+HOMEPATH          = "http://github.com/youpy/scissor-echonest"
 BIN_FILES         = %w(  )
 VERS              = "0.0.6"
 
