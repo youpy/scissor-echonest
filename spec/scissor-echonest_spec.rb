@@ -11,6 +11,16 @@ describe Scissor do
     Scissor::Chunk.echonest_api_key.should eql('XXX')
   end
 
+  it 'should get an instance of EchoNest::Api' do
+    Scissor.echonest_api_key = 'XXX'
+
+    echonest = Scissor::Chunk.echonest
+    echonest.user_agent.send_timeout = 300
+
+    echonest.should be_an_instance_of(Echonest::Api)
+    Scissor::Chunk.echonest.user_agent.send_timeout.should eql(300)
+  end
+
   it 'should get beats' do
     Scissor.echonest_api_key = 'XXX'
 
@@ -18,7 +28,7 @@ describe Scissor do
     api.user_agent.stub!(:get_content).and_return(open(fixture('get_beats.xml')).read)
 
     scissor = Scissor(fixture('sample.mp3'))
-    scissor.stub!(:echonest).and_return(api)
+    Scissor::Chunk.stub!(:echonest).and_return(api)
 
     beats = scissor.beats
     beats.size.should eql(385)
@@ -39,7 +49,7 @@ describe Scissor do
     api.user_agent.stub!(:get_content).and_return(open(fixture('get_segments.xml')).read)
 
     scissor = Scissor(fixture('sample.mp3'))
-    scissor.stub!(:echonest).and_return(api)
+    Scissor::Chunk.stub!(:echonest).and_return(api)
 
     segments = scissor.segments
     segments.size.should eql(830)

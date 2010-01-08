@@ -10,10 +10,10 @@ module Scissor
   class Chunk
     class << self
       attr_accessor :echonest_api_key
-    end
 
-    def echonest
-      Echonest(self.class.echonest_api_key)
+      def echonest
+        @echonest ||= Echonest(echonest_api_key)
+      end
     end
 
     def beats
@@ -21,7 +21,7 @@ module Scissor
         chunks = []
         scissor = to_file(tmpfile, :bitrate => '64k')
 
-        beats = echonest.get_beats(tmpfile)
+        beats = self.class.echonest.get_beats(tmpfile)
 
         if beats.size != 0
           chunk = self[0, beats.first.start]
@@ -45,7 +45,7 @@ module Scissor
       tempfile_for_echonest do |tmpfile|
         scissor = to_file(tmpfile, :bitrate => '64k')
 
-        segments = echonest.get_segments(tmpfile)
+        segments = self.class.echonest.get_segments(tmpfile)
         segments.inject([]) do |chunks, segment|
           chunk = self[segment.start, segment.duration]
           chunk.set_delegate(segment)
