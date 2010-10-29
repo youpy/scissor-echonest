@@ -62,7 +62,7 @@ spec = Gem::Specification.new do |s|
   s.test_files        = Dir["test/test_*.rb"]
 
   s.add_dependency('scissor', '>=0.0.22')
-  s.add_dependency('ruby-echonest', '>=0.0.6')
+  s.add_dependency('ruby-echonest', '>=0.1.1')
   #s.required_ruby_version = '>= 1.8.2'
 
   s.files = %w(README.rdoc ChangeLog Rakefile) +

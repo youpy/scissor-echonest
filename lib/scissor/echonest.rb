@@ -25,7 +25,7 @@ module Scissor
 
         if beats.size != 0
           chunk = self[0, beats.first.start]
-          beat = Beat.new(beats.first.start, 1.0)
+          beat = Beat.new(0.0, beats.first.start, 1.0)
           chunk.set_delegate(beat)
           chunks << chunk
         end
