@@ -17,11 +17,8 @@ module Scissor
     end
 
     def bars
-      tempfile_for_echonest do |tmpfile|
-        chunks = []
-        scissor = to_file(tmpfile, :bitrate => '64k')
-
-        bars = self.class.echonest.get_bars(tmpfile)
+      analyze do |analysis|
+        bars = analysis.bars
         bars.inject([]) do |chunks, bar|
           chunk = self[bar.start, bar.duration]
           chunk.set_delegate(bar)
@@ -32,11 +29,9 @@ module Scissor
     end
 
     def beats
-      tempfile_for_echonest do |tmpfile|
+      analyze do |analysis|
         chunks = []
-        scissor = to_file(tmpfile, :bitrate => '64k')
-
-        beats = self.class.echonest.get_beats(tmpfile)
+        beats = analysis.beats
 
         if beats.size != 0
           chunk = self[0, beats.first.start]
@@ -57,10 +52,8 @@ module Scissor
     end
 
     def segments
-      tempfile_for_echonest do |tmpfile|
-        scissor = to_file(tmpfile, :bitrate => '64k')
-
-        segments = self.class.echonest.get_segments(tmpfile)
+      analyze do |analysis|
+        segments = analysis.segments
         segments.inject([]) do |chunks, segment|
           chunk = self[segment.start, segment.duration]
           chunk.set_delegate(segment)
@@ -72,11 +65,13 @@ module Scissor
 
     private
 
-    def tempfile_for_echonest
+    def analyze
       tmpfile = Pathname.new('/tmp/scissor_echonest_temp_' + $$.to_s + '.mp3')
-      yield tmpfile
+      scissor = to_file(tmpfile, :bitrate => '64k')
+
+      yield self.class.echonest.track.analysis(tmpfile)
     ensure
-      tmpfile.unlink
+      tmpfile.unlink if tmpfile.exist?
     end
   end
 end
