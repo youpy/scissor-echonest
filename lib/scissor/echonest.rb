@@ -16,6 +16,21 @@ module Scissor
       end
     end
 
+    def bars
+      tempfile_for_echonest do |tmpfile|
+        chunks = []
+        scissor = to_file(tmpfile, :bitrate => '64k')
+
+        bars = self.class.echonest.get_bars(tmpfile)
+        bars.inject([]) do |chunks, bar|
+          chunk = self[bar.start, bar.duration]
+          chunk.set_delegate(bar)
+          chunks << chunk
+          chunks
+        end
+      end
+    end
+
     def beats
       tempfile_for_echonest do |tmpfile|
         chunks = []

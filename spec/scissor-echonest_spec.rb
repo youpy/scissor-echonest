@@ -34,6 +34,16 @@ describe Scissor do
       Scissor::Chunk.stub!(:echonest).and_return(api)
     end
 
+    it 'should get bars' do
+      bars = @scissor.bars
+      bar = bars.first
+
+      bars.size.should eql(80)
+      bar.start.should be_close(1.0, 0.1)
+      bar.duration.should be_close(1.48, 0.01)
+      bar.confidence.should be_close(0.18, 0.01)
+    end
+
     it 'should get beats' do
       beats = @scissor.beats
 
