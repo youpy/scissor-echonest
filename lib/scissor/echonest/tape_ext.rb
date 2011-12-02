@@ -1,5 +1,5 @@
 module Scissor
-  class Chunk
+  class Tape
     def set_delegate(delegate)
       @delegate = delegate
     end

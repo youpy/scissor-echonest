@@ -1,13 +1,13 @@
 require 'scissor'
 require 'echonest'
-require 'scissor/echonest/chunk_ext.rb'
+require 'scissor/echonest/tape_ext.rb'
 
 module Scissor
   def self.echonest_api_key=(echonest_api_key)
-    Scissor::Chunk.echonest_api_key = echonest_api_key
+    Scissor::Tape.echonest_api_key = echonest_api_key
   end
 
-  class Chunk
+  class Tape
     class << self
       attr_accessor :echonest_api_key
 
@@ -19,46 +19,46 @@ module Scissor
     def bars
       analyze do |analysis|
         bars = analysis.bars
-        bars.inject([]) do |chunks, bar|
-          chunk = self[bar.start, bar.duration]
-          chunk.set_delegate(bar)
-          chunks << chunk
-          chunks
+        bars.inject([]) do |tapes, bar|
+          tape = self[bar.start, bar.duration]
+          tape.set_delegate(bar)
+          tapes << tape
+          tapes
         end
       end
     end
 
     def beats
       analyze do |analysis|
-        chunks = []
+        tapes = []
         beats = analysis.beats
 
         if beats.size != 0
-          chunk = self[0, beats.first.start]
+          tape = self[0, beats.first.start]
           beat = Beat.new(0.0, beats.first.start, 1.0)
-          chunk.set_delegate(beat)
-          chunks << chunk
+          tape.set_delegate(beat)
+          tapes << tape
         end
 
         beats.inject do |m, beat|
-          chunk = self[m.start, beat.start - m.start]
-          chunk.set_delegate(m)
-          chunks << chunk
+          tape = self[m.start, beat.start - m.start]
+          tape.set_delegate(m)
+          tapes << tape
           beat
         end
 
-        chunks
+        tapes
       end
     end
 
     def segments
       analyze do |analysis|
         segments = analysis.segments
-        segments.inject([]) do |chunks, segment|
-          chunk = self[segment.start, segment.duration]
-          chunk.set_delegate(segment)
-          chunks << chunk
-          chunks
+        segments.inject([]) do |tapes, segment|
+          tape = self[segment.start, segment.duration]
+          tape.set_delegate(segment)
+          tapes << tape
+          tapes
         end
       end
     end
